@@ -5,20 +5,30 @@ import (
 	"slices"
 )
 
-func Sum[T constraints.Integer | constraints.Float](s []T) T {
-	var sm T
+func Filter[T any](s []T, f func(T) bool) []T {
+	var r []T
 	for _, v := range s {
-		sm += v
+		if f(v) {
+			r = append(r, v)
+		}
 	}
-	return sm
+	return r
+}
+
+func Sum[T constraints.Integer | constraints.Float](s []T) T {
+	var r T
+	for _, v := range s {
+		r += v
+	}
+	return r
 }
 
 func Unique[T comparable](s []T) []T {
-	var u []T
+	var r []T
 	for _, v := range s {
-		if !slices.Contains(u, v) {
-			u = append(u, v)
+		if !slices.Contains(r, v) {
+			r = append(r, v)
 		}
 	}
-	return u
+	return r
 }
