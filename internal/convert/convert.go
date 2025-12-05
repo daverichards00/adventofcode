@@ -7,5 +7,5 @@ func StrToInt(s string) int {
 	if err != nil {
 		panic(err)
 	}
-	return iz
+	return i
 }
