@@ -15,6 +15,28 @@ func Filter[T any](s []T, f func(T) bool) []T {
 	return r
 }
 
+func Intersect[T comparable](a, b []T) []T {
+	var r []T
+	for _, v := range a {
+		if slices.Contains(b, v) {
+			r = append(r, v)
+		}
+	}
+	return r
+}
+
+func Reduce[T any](s []T, f func(T, T) T) T {
+	var r T
+	if len(s) == 0 {
+		return r
+	}
+	r = s[0]
+	for _, v := range s[1:] {
+		r = f(r, v)
+	}
+	return r
+}
+
 func Sum[T constraints.Integer | constraints.Float](s []T) T {
 	var r T
 	for _, v := range s {
