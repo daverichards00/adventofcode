@@ -1,5 +1,7 @@
 package spatial
 
+import "fmt"
+
 type Point2D struct {
 	x, y int
 }
@@ -18,4 +20,12 @@ func (p Point2D) Y() int {
 
 func (p Point2D) Add(v Vector2D) Point2D {
 	return Point2D{p.x + v.x, p.y + v.y}
+}
+
+func (p Point2D) To(other Point2D) Vector2D {
+	return Vector2D{other.x - p.x, other.y - p.y}
+}
+
+func (p Point2D) String() string {
+	return fmt.Sprintf("(%d,%d)", p.x, p.y)
 }
