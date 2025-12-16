@@ -15,6 +15,16 @@ func Filter[T any](s []T, f func(T) bool) []T {
 	return r
 }
 
+func IndexAllFunc[T any](s []T, f func(T) bool) []int {
+	var r []int
+	for i, v := range s {
+		if f(v) {
+			r = append(r, i)
+		}
+	}
+	return r
+}
+
 func Intersect[T comparable](a, b []T) []T {
 	var r []T
 	for _, v := range a {
