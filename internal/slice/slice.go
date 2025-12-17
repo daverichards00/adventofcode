@@ -47,6 +47,20 @@ func Reduce[T any](s []T, f func(T, T) T) T {
 	return r
 }
 
+func Split[T comparable](s []T, v T) [][]T {
+	var r [][]T
+	for {
+		j := slices.Index(s, v)
+		if j < 0 {
+			break
+		}
+		r = append(r, s[:j])
+		s = s[j+1:]
+	}
+	r = append(r, s)
+	return r
+}
+
 func Sum[T constraints.Integer | constraints.Float](s []T) T {
 	var r T
 	for _, v := range s {
