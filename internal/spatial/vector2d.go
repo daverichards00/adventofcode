@@ -47,6 +47,10 @@ func (v Vector2D) Unit() Vector2D {
 	return u
 }
 
+func (v Vector2D) Manhattan() int {
+	return maths.Abs(v.x) + maths.Abs(v.y)
+}
+
 func (v Vector2D) String() string {
 	return fmt.Sprintf("(%d,%d)", v.x, v.y)
 }
