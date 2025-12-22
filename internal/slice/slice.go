@@ -69,6 +69,14 @@ func Sum[T constraints.Integer | constraints.Float](s []T) T {
 	return r
 }
 
+func Transform[T, N any](s []T, f func(T) N) []N {
+	var r []N
+	for _, v := range s {
+		r = append(r, f(v))
+	}
+	return r
+}
+
 func Unique[T comparable](s []T) []T {
 	var r []T
 	for _, v := range s {
