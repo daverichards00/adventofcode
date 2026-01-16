@@ -1,9 +1,26 @@
 package slice
 
 import (
+	"github.com/daverichards00/adventofcode/internal/maths"
 	"golang.org/x/exp/constraints"
 	"slices"
 )
+
+func Combinations[T any](s []T) [][]T {
+	if len(s) == 1 {
+		return [][]T{s}
+	}
+	r := make([][]T, maths.Factorial(len(s)))
+
+	for k, v := range s {
+		c := Combinations[T](slices.Delete(slices.Clone(s), k, k+1))
+		fk := k * len(c)
+		for kk, vv := range c {
+			r[fk+kk] = append([]T{v}, vv...)
+		}
+	}
+	return r
+}
 
 func Filter[T any](s []T, f func(T) bool) []T {
 	var r []T
