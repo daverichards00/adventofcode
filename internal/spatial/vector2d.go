@@ -35,6 +35,16 @@ func (v Vector2D) Y() int {
 	return v.y
 }
 
+func (v Vector2D) RotateClockwise90() (vector Vector2D) {
+	// Assumes above compass directions (North = (0, -1))
+	return Vector2D{-v.y, v.x}
+}
+
+func (v Vector2D) RotateAntiClockwise90() (vector Vector2D) {
+	// Assumes above compass directions (North = (0, -1))
+	return Vector2D{v.y, -v.x}
+}
+
 func (v Vector2D) Unit() Vector2D {
 	// Only true unit vector for the 4 compass directions
 	u := Vector2D{v.x, v.y}
