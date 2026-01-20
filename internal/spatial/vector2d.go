@@ -47,6 +47,21 @@ func (v Vector2D) Unit() Vector2D {
 	return u
 }
 
+// Min returns the smallest vector in the same direction
+func (v Vector2D) Min() Vector2D {
+	if v.x == 0 || v.y == 0 {
+		return v.Unit()
+	}
+	for factor := min(maths.Abs(v.x), maths.Abs(v.y)); factor > 1; factor-- {
+		nx, ny := v.x/factor, v.y/factor
+		if nx*factor == v.x && ny*factor == v.y {
+			// Divided by factor and result is still an int
+			return Vector2D{nx, ny}
+		}
+	}
+	return v
+}
+
 func (v Vector2D) Manhattan() int {
 	return maths.Abs(v.x) + maths.Abs(v.y)
 }
